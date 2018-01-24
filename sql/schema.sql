@@ -11,8 +11,7 @@ CREATE TABLE users (
 	PRIMARY KEY (id)) ENGINE=INNODB;
 	
 CREATE TABLE users_features (
-    id MEDIUMINT NOT NULL AUTO_INCREMENT,
-	user_id MEDIUMINT NOT NULL, 
+	user_id MEDIUMINT NOT NULL,
 	feature_id MEDIUMINT NOT NULL, 
 	PRIMARY KEY (user_id, feature_id),
 	FOREIGN KEY (user_id)
