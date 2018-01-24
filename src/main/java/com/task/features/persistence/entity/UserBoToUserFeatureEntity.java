@@ -14,7 +14,7 @@ public class UserBoToUserFeatureEntity {
         bo.setId(entity.getId());
         bo.setFirstName(entity.getFirstName());
         bo.setLastName(entity.getLastName());
-        bo.setFeatures(entity.getUserFeatures().stream().map(e -> FeatureBoToFeatureEntityFactory.toBo(e.getFeature(), e.isEnabled())).collect(Collectors.toSet()));
+        bo.setFeatures(entity.getFeatures().stream().map(e -> FeatureBoToFeatureEntityFactory.toBo(e, true)).collect(Collectors.toSet()));
 
         return bo;
     }

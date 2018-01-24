@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public interface FeatureService {
 
-    Set<FeatureBo> getFeatures();
+    Set<FeatureBo> getEnabledFeatures();
 
     void updateFeature(Integer featureId, FeatureBo feature);
 

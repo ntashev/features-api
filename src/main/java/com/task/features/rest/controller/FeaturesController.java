@@ -1,7 +1,7 @@
 package com.task.features.rest.controller;
 
-import com.task.features.rest.dto.FeatureDto;
-import com.task.features.rest.dto.FeatureDtoFactory;
+import com.task.features.rest.dto.AvailableFeaturesDto;
+import com.task.features.rest.dto.AvailableFeaturesDtoFactory;
 import com.task.features.service.FeatureService;
 import com.task.features.service.UserService;
 import com.task.features.service.model.UserBo;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author nikolay.tashev on 22/01/2018.
@@ -28,8 +26,8 @@ public class FeaturesController {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<FeatureDto> getGlobalFeatures() {
-        return featureService.getFeatures().stream().map(FeatureDtoFactory::toDto).collect(Collectors.toSet());
+    public AvailableFeaturesDto getGlobalFeatures() {
+        return AvailableFeaturesDtoFactory.toDto(featureService.getEnabledFeatures());
     }
 
     @DELETE
@@ -43,9 +41,9 @@ public class FeaturesController {
     @GET
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<FeatureDto> getFeaturesForUser(@PathParam("id") int id) {
+    public AvailableFeaturesDto getFeaturesForUser(@PathParam("id") int id) {
         UserBo user = userService.getUserById(id);
-        return user.getFeatures().stream().map(FeatureDtoFactory::toDto).collect(Collectors.toSet());
+        return AvailableFeaturesDtoFactory.toDto(user.getFeatures());
     }
 
     @DELETE

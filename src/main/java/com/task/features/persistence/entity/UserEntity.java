@@ -25,7 +25,7 @@ public class UserEntity {
     private String lastName;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<UserFeatureEntity> userFeatures;
+    private Set<FeatureEntity> features;
 
     public Integer getId() {
         return id;
@@ -51,12 +51,12 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
-    public Set<UserFeatureEntity> getUserFeatures() {
-        return userFeatures;
+    public Set<FeatureEntity> getFeatures() {
+        return features;
     }
 
-    public void setUserFeatures(Set<UserFeatureEntity> userFeatures) {
-        this.userFeatures = userFeatures;
+    public void setFeatures(Set<FeatureEntity> features) {
+        this.features = features;
     }
 
     @Override
@@ -67,12 +67,12 @@ public class UserEntity {
         return Objects.equals(id, that.id) &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(userFeatures, that.userFeatures);
+                Objects.equals(features, that.features);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, userFeatures);
+        return Objects.hash(id, firstName, lastName, features);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UserEntity {
                 .append("id", id)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
-                .append("userFeatures", userFeatures)
+                .append("features", features)
                 .toString();
     }
 }

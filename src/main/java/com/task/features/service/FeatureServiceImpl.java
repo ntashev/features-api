@@ -2,7 +2,6 @@ package com.task.features.service;
 
 import com.task.features.persistence.entity.FeatureBoToFeatureEntityFactory;
 import com.task.features.persistence.entity.FeatureEntity;
-import com.task.features.persistence.entity.UserFeatureEntity;
 import com.task.features.persistence.repository.FeatureRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.FeatureBo;
@@ -25,9 +24,9 @@ public class FeatureServiceImpl implements FeatureService {
     private FeatureRepo repo;
 
     @Override
-    public Set<FeatureBo> getFeatures() {
+    public Set<FeatureBo> getEnabledFeatures() {
         try (Stream<FeatureEntity> features = repo.findAll()) {
-            return features.map(FeatureBoToFeatureEntityFactory::toBo).collect(Collectors.toSet());
+            return features.filter(f -> f.isGloballyEnabled()).map(FeatureBoToFeatureEntityFactory::toBo).collect(Collectors.toSet());
         }
     }
 
@@ -38,18 +37,6 @@ public class FeatureServiceImpl implements FeatureService {
     @Override
     public void deleteFeature(Integer featureId) {
         FeatureEntity feature = repo.findOneById(featureId).orElseThrow(() -> new EntityNotFoundException("Feature not found."));
-        for (Iterator<UserFeatureEntity> i = feature.getUserFeatures().iterator(); i.hasNext();) {
-            UserFeatureEntity ufe = i.next();
-            if (ufe.getFeature().getId().equals(featureId)) {
-                i.remove();
-                System.out.println("Removed " + ufe.getId());
-            }
-        }
-        for (UserFeatureEntity e : feature.getUserFeatures()) {
-            System.out.println(e.getId());
-        }
-        feature = repo.saveAndFlush(feature);
-        System.out.println("updated!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//        repo.delete(feature);
+        repo.delete(feature);
     }
 }

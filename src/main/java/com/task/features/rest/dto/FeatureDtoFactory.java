@@ -11,7 +11,6 @@ public class FeatureDtoFactory {
     public static FeatureDto toDto(FeatureBo bo) {
         FeatureDto dto = new FeatureDto();
         dto.setName(bo.getName());
-        dto.setEnabled(bo.isEnabled());
 
         return dto;
     }

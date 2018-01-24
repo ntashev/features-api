@@ -2,15 +2,7 @@ package com.task.features.persistence.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,8 +23,13 @@ public class FeatureEntity {
     @Column(name = "globally_enabled")
     private boolean isGloballyEnabled;
 
-    @OneToMany(mappedBy = "feature", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Set<UserFeatureEntity> userFeatures;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "users_features",
+            joinColumns =  @JoinColumn(name = "feature_id") ,
+            inverseJoinColumns =  @JoinColumn(name = "user_id")
+    )
+    private Set<UserEntity> userFeatures;
 
     public Integer getId() {
         return id;
@@ -58,11 +55,11 @@ public class FeatureEntity {
         isGloballyEnabled = globallyEnabled;
     }
 
-    public Set<UserFeatureEntity> getUserFeatures() {
+    public Set<UserEntity> getUserFeatures() {
         return userFeatures;
     }
 
-    public void setUserFeatures(Set<UserFeatureEntity> userFeatures) {
+    public void setUserFeatures(Set<UserEntity> userFeatures) {
         this.userFeatures = userFeatures;
     }
 
@@ -70,11 +67,11 @@ public class FeatureEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FeatureEntity entity = (FeatureEntity) o;
-        return isGloballyEnabled == entity.isGloballyEnabled &&
-                Objects.equals(id, entity.id) &&
-                Objects.equals(name, entity.name) &&
-                Objects.equals(userFeatures, entity.userFeatures);
+        FeatureEntity that = (FeatureEntity) o;
+        return isGloballyEnabled == that.isGloballyEnabled &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(userFeatures, that.userFeatures);
     }
 
     @Override

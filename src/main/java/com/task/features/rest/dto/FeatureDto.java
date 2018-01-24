@@ -9,8 +9,6 @@ public class FeatureDto {
 
     private String name;
 
-    private boolean isEnabled;
-
     public String getName() {
         return name;
     }
@@ -19,19 +17,10 @@ public class FeatureDto {
         this.name = name;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("name", name)
-                .append("isGloballyEnabled", isEnabled)
                 .toString();
     }
 }
