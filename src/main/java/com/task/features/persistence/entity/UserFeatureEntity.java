@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * @author nikolay.tashev on 23/01/2018.
@@ -66,12 +67,28 @@ public class UserFeatureEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserFeatureEntity that = (UserFeatureEntity) o;
+        return isEnabled == that.isEnabled &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(feature, that.feature);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user, feature, isEnabled);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("user", user)
                 .append("feature", feature)
-                .append("isEnabled", isEnabled)
+                .append("isGloballyEnabled", isEnabled)
                 .toString();
     }
 }

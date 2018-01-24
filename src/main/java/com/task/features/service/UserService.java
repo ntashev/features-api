@@ -14,5 +14,5 @@ public interface UserService {
 
     void updateFeaturesForUser(Integer userId, Set<FeatureBo> features);
 
-    void deleteFeatureForUser(Integer userId, FeatureBo feature);
+    void deleteFeatureForUser(Integer userId, Integer featureId);
 }

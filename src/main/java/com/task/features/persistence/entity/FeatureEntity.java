@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * @author nikolay.tashev on 23/01/2018.
@@ -23,8 +24,8 @@ public class FeatureEntity {
     @Column
     private String name;
 
-    @Column(name = "is_enabled")
-    private boolean isEnabled;
+    @Column(name = "globally_enabled")
+    private boolean isGloballyEnabled;
 
     public Integer getId() {
         return id;
@@ -42,12 +43,27 @@ public class FeatureEntity {
         this.name = name;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
+    public boolean isGloballyEnabled() {
+        return isGloballyEnabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
+    public void setGloballyEnabled(boolean globallyEnabled) {
+        isGloballyEnabled = globallyEnabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeatureEntity that = (FeatureEntity) o;
+        return isGloballyEnabled == that.isGloballyEnabled &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, isGloballyEnabled);
     }
 
     @Override
@@ -55,7 +71,7 @@ public class FeatureEntity {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("name", name)
-                .append("isEnabled", isEnabled)
+                .append("isGloballyEnabled", isGloballyEnabled)
                 .toString();
     }
 }

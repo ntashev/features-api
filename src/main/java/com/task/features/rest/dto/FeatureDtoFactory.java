@@ -1,19 +1,12 @@
-package com.task.features.service.model;
+package com.task.features.rest.dto;
 
 import com.task.features.rest.dto.FeatureDto;
+import com.task.features.service.model.FeatureBo;
 
 /**
  * @author nikolay.tashev on 23/01/2018.
  */
-public class FeatureBoToFeatureDtoFactory {
-
-    public static FeatureBo toBo(FeatureDto dto) {
-        FeatureBo bo = new FeatureBo();
-        bo.setName(dto.getName());
-        bo.setEnabled(dto.isEnabled());
-
-        return bo;
-    }
+public class FeatureDtoFactory {
 
     public static FeatureDto toDto(FeatureBo bo) {
         FeatureDto dto = new FeatureDto();

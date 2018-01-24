@@ -3,6 +3,7 @@ package com.task.features.service;
 import com.task.features.persistence.entity.FeatureBoToFeatureEntityFactory;
 import com.task.features.persistence.entity.FeatureEntity;
 import com.task.features.persistence.repository.FeatureRepo;
+import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.FeatureBo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public void deleteFeature(Integer featureId) {
-
+        FeatureEntity feature = repo.findOneById(featureId).orElseThrow(() -> new EntityNotFoundException("Feature not found."));
+        repo.delete(feature);
     }
 }

@@ -8,7 +8,7 @@ import com.task.features.service.model.FeatureBo;
 public class FeatureBoToFeatureEntityFactory {
 
     public static FeatureBo toBo(FeatureEntity entity) {
-        return toBo(entity, entity.isEnabled());
+        return toBo(entity, entity.isGloballyEnabled());
     }
 
     public static FeatureBo toBo(FeatureEntity entity, boolean isEnabled) {
@@ -21,7 +21,7 @@ public class FeatureBoToFeatureEntityFactory {
 
     public static FeatureEntity toEntity(FeatureBo bo) {
         FeatureEntity entity = new FeatureEntity();
-        entity.setEnabled(bo.isEnabled());
+        entity.setGloballyEnabled(bo.isEnabled());
         entity.setName(bo.getName());
 
         return entity;
