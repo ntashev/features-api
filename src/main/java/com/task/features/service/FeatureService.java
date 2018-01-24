@@ -13,5 +13,7 @@ public interface FeatureService {
 
     void updateFeature(Integer featureId, FeatureBo feature);
 
+    Integer createFeature(FeatureBo feature);
+
     void deleteFeature(Integer featureId);
 }

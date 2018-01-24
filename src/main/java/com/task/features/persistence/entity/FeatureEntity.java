@@ -3,6 +3,7 @@ package com.task.features.persistence.entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,13 +24,13 @@ public class FeatureEntity {
     @Column(name = "globally_enabled")
     private boolean isGloballyEnabled;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_features",
             joinColumns =  @JoinColumn(name = "feature_id") ,
             inverseJoinColumns =  @JoinColumn(name = "user_id")
     )
-    private Set<UserEntity> userFeatures;
+    private Set<UserEntity> users = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -55,12 +56,12 @@ public class FeatureEntity {
         isGloballyEnabled = globallyEnabled;
     }
 
-    public Set<UserEntity> getUserFeatures() {
-        return userFeatures;
+    public Set<UserEntity> getUsers() {
+        return users;
     }
 
-    public void setUserFeatures(Set<UserEntity> userFeatures) {
-        this.userFeatures = userFeatures;
+    public void setUsers(Set<UserEntity> users) {
+        this.users = users;
     }
 
     @Override
@@ -70,13 +71,12 @@ public class FeatureEntity {
         FeatureEntity that = (FeatureEntity) o;
         return isGloballyEnabled == that.isGloballyEnabled &&
                 Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(userFeatures, that.userFeatures);
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isGloballyEnabled, userFeatures);
+        return Objects.hash(id, name, isGloballyEnabled);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class FeatureEntity {
                 .append("id", id)
                 .append("name", name)
                 .append("isGloballyEnabled", isGloballyEnabled)
-                .append("userFeatures", userFeatures)
+                .append("users", users)
                 .toString();
     }
 }

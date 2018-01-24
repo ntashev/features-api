@@ -19,7 +19,7 @@ public interface FeatureRepo extends Repository<FeatureEntity, Integer> {
     Stream<FeatureEntity> findAll();
 
     @Transactional
-    FeatureEntity saveAndFlush(FeatureEntity entity);
+    FeatureEntity save(FeatureEntity entity);
 
     @Transactional
     void delete(FeatureEntity entity);

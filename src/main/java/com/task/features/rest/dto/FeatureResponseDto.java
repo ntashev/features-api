@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  * @author nikolay.tashev on 22/01/2018.
  */
-public class FeatureDto {
+public class FeatureResponseDto {
 
     private String name;
 

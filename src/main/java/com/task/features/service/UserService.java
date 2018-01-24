@@ -12,7 +12,5 @@ public interface UserService {
 
     UserBo getUserById(Integer userId);
 
-    void updateFeaturesForUser(Integer userId, Set<FeatureBo> features);
-
-    void deleteFeatureForUser(Integer userId, Integer featureId);
+    void updateFeatureForUser(Integer userId, Integer featureId, boolean enabled);
 }

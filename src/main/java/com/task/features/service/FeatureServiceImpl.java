@@ -32,6 +32,16 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public void updateFeature(Integer featureId, FeatureBo feature) {
+        FeatureEntity existingFeature = repo.findOneById(featureId).orElseThrow(() -> new EntityNotFoundException("Feature not found."));
+        existingFeature.setGloballyEnabled(feature.isEnabled());
+        existingFeature.setName(feature.getName());
+        repo.save(existingFeature);
+    }
+
+    @Override
+    public Integer createFeature(FeatureBo feature) {
+        FeatureEntity entity = repo.save(FeatureBoToFeatureEntityFactory.toEntity(feature));
+        return entity.getId();
     }
 
     @Override

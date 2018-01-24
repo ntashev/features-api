@@ -6,13 +6,13 @@ import java.util.Set;
 
 public class AvailableFeaturesDto {
 
-    private Set<FeatureDto> enabledFeatures;
+    private Set<FeatureResponseDto> enabledFeatures;
 
-    public Set<FeatureDto> getEnabledFeatures() {
+    public Set<FeatureResponseDto> getEnabledFeatures() {
         return enabledFeatures;
     }
 
-    public void setEnabledFeatures(Set<FeatureDto> enabledFeatures) {
+    public void setEnabledFeatures(Set<FeatureResponseDto> enabledFeatures) {
         this.enabledFeatures = enabledFeatures;
     }
 

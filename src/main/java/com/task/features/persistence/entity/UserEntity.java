@@ -2,10 +2,10 @@ package com.task.features.persistence.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.*;
 
 /**
  * @author nikolay.tashev on 23/01/2018.
@@ -24,8 +24,8 @@ public class UserEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<FeatureEntity> features;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private Set<FeatureEntity> features = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -66,13 +66,12 @@ public class UserEntity {
         UserEntity that = (UserEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
-                Objects.equals(features, that.features);
+                Objects.equals(lastName, that.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, features);
+        return Objects.hash(id, firstName, lastName);
     }
 
     @Override

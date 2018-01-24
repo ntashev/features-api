@@ -9,7 +9,7 @@ public class AvailableFeaturesDtoFactory {
 
     public static AvailableFeaturesDto toDto(Set<FeatureBo> features) {
         AvailableFeaturesDto dto = new AvailableFeaturesDto();
-        dto.setEnabledFeatures(features.stream().map(FeatureDtoFactory::toDto).collect(Collectors.toSet()));
+        dto.setEnabledFeatures(features.stream().map(FeatureResponseDtoFactory::toDto).collect(Collectors.toSet()));
 
         return dto;
     }
