@@ -31,7 +31,7 @@ public class UserFeatureEntity {
     @JoinColumn(name = "feature_id")
     private FeatureEntity feature;
 
-    @Column(name = "is_enabled")
+    @Column(name = "enabled")
     private boolean isEnabled;
 
     public Integer getId() {
@@ -72,14 +72,12 @@ public class UserFeatureEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserFeatureEntity that = (UserFeatureEntity) o;
         return isEnabled == that.isEnabled &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(feature, that.feature);
+                Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, feature, isEnabled);
+        return Objects.hash(id, isEnabled);
     }
 
     @Override

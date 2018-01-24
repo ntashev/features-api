@@ -7,6 +7,8 @@ import org.springframework.data.repository.Repository;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import javax.transaction.Transactional;
+
 /**
  * @author nikolay.tashev on 23/01/2018.
  */
@@ -16,7 +18,9 @@ public interface FeatureRepo extends Repository<FeatureEntity, Integer> {
 
     Stream<FeatureEntity> findAll();
 
-    FeatureEntity save(FeatureEntity entity);
+    @Transactional
+    FeatureEntity saveAndFlush(FeatureEntity entity);
 
+    @Transactional
     void delete(FeatureEntity entity);
 }
