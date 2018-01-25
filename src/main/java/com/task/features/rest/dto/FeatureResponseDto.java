@@ -3,7 +3,7 @@ package com.task.features.rest.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * @author nikolay.tashev on 22/01/2018.
+ * Data transfer object representation of feature response body.
  */
 public class FeatureResponseDto {
 

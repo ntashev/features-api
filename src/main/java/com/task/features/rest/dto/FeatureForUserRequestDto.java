@@ -2,10 +2,20 @@ package com.task.features.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+/**
+ * Data transfer object representation of feature for user request body.
+ */
 public class FeatureForUserRequestDto {
 
+    @Min(1)
+    @NotNull
     private Integer featureId;
-    private boolean enabled;
+
+    @NotNull
+    private Boolean enabled;
 
     public Integer getFeatureId() {
         return featureId;
@@ -15,11 +25,11 @@ public class FeatureForUserRequestDto {
         this.featureId = featureId;
     }
 
-    public boolean isEnabled() {
+    public Boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 

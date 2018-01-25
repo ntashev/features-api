@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Set;
 
+/**
+ * Data transfer object representation of available features.
+ */
 public class AvailableFeaturesDto {
 
     private Set<FeatureResponseDto> enabledFeatures;

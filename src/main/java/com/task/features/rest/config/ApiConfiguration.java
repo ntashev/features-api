@@ -10,7 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * @author nikolay.tashev on 22/01/2018.
+ * Api related configuration.
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ApiConfiguration implements WebApplicationInitializer {

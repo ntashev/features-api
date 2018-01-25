@@ -3,10 +3,16 @@ package com.task.features.rest.dto;
 import com.task.features.service.model.FeatureBo;
 
 /**
- * @author nikolay.tashev on 23/01/2018.
+ * Factory to create {@link FeatureResponseDto}.
  */
 public class FeatureResponseDtoFactory {
 
+    /**
+     * Creates {@link FeatureResponseDto} from bo.
+     *
+     * @param bo business object
+     * @return dto
+     */
     public static FeatureResponseDto toDto(FeatureBo bo) {
         FeatureResponseDto dto = new FeatureResponseDto();
         dto.setName(bo.getName());

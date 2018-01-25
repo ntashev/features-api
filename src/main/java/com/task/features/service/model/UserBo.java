@@ -2,25 +2,17 @@ package com.task.features.service.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author nikolay.tashev on 23/01/2018.
+ * Business onject representation of user.
  */
 public class UserBo {
 
-    private Integer id;
     private String firstName;
     private String lastName;
     private Set<FeatureBo> features;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -47,9 +39,23 @@ public class UserBo {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBo userBo = (UserBo) o;
+        return Objects.equals(firstName, userBo.firstName) &&
+                Objects.equals(lastName, userBo.lastName) &&
+                Objects.equals(features, userBo.features);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, features);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
                 .append("features", features)

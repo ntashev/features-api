@@ -2,8 +2,10 @@ package com.task.features.service.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Objects;
+
 /**
- * @author nikolay.tashev on 23/01/2018.
+ * Business onject representation of feature.
  */
 public class FeatureBo {
 
@@ -24,6 +26,20 @@ public class FeatureBo {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeatureBo featureBo = (FeatureBo) o;
+        return isEnabled == featureBo.isEnabled &&
+                Objects.equals(name, featureBo.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, isEnabled);
     }
 
     @Override

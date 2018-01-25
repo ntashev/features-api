@@ -1,11 +1,18 @@
 package com.task.features.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 
 public class FeatureRequestDto {
 
+    @Length(min = 2, max = 30)
+    @NotNull
     private String name;
-    private boolean enabled;
+
+    @NotNull
+    private Boolean enabled;
 
     public String getName() {
         return name;
@@ -15,11 +22,11 @@ public class FeatureRequestDto {
         this.name = name;
     }
 
-    public boolean isEnabled() {
+    public Boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 

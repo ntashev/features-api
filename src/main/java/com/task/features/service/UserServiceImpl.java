@@ -1,13 +1,18 @@
 package com.task.features.service;
 
 import com.task.features.persistence.entity.FeatureEntity;
-import com.task.features.persistence.entity.UserBoToUserFeatureEntity;
+import com.task.features.service.model.UserBoFactory;
 import com.task.features.persistence.entity.UserEntity;
 import com.task.features.persistence.repository.FeatureRepo;
 import com.task.features.persistence.repository.UserRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.UserBo;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -18,6 +23,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private UserRepo userRepo;
 
@@ -25,21 +32,38 @@ public class UserServiceImpl implements UserService {
     private FeatureRepo featureRepo;
 
     @Override
+    @Cacheable(cacheNames = "users", key = "#userId")
     public UserBo getUserById(Integer userId) {
-        UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> new EntityNotFoundException("User not found."));
+        UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> {
+            logger.info("User with id {} not found", userId);
+            return new EntityNotFoundException("User not found.");
+        });
+
+        logger.info("Found user with id {}", user.getId());
         //filter out services that are globally disabled
-        user.setFeatures(user.getFeatures().stream().filter(f -> f.isGloballyEnabled()).collect(Collectors.toSet()));
-        return UserBoToUserFeatureEntity.toBo(user);
+        user.setFeatures(user.getFeatures().stream().filter(FeatureEntity::isGloballyEnabled).collect(Collectors.toSet()));
+        return UserBoFactory.toBo(user);
     }
 
     @Override
+    @CacheEvict(cacheNames = "users", key = "#userId")
     public void updateFeatureForUser(Integer userId, Integer featureId, boolean enabled) {
-        UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> new EntityNotFoundException("User not found."));
-        FeatureEntity feature = featureRepo.findOneById(featureId).orElseThrow(() -> new EntityNotFoundException("Feature not found."));
+        UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> {
+            logger.info("User with id {} not found", userId);
+            return new EntityNotFoundException("User not found.");
+        });
+
+        FeatureEntity feature = featureRepo.findOneById(featureId).orElseThrow(() -> {
+            logger.info("Feature with id {} not found", featureId);
+            return new EntityNotFoundException("Feature not found.");
+        });
+
         if (enabled) {
             enableFeatureForUser(user, feature);
+            logger.info("Enabled feature with id {} for user with id {}", featureId, userId);
         } else {
             disableFeatureForUser(user, feature);
+            logger.info("Disabled feature with id {} for user with id {}", featureId, userId);
         }
     }
 
@@ -55,5 +79,15 @@ public class UserServiceImpl implements UserService {
         feature.getUsers().remove(user);
         userRepo.save(user);
         featureRepo.save(feature);
+    }
+
+    //used for testing
+    void setUserRepo(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    //used for testing
+    void setFeatureRepo(FeatureRepo featureRepo) {
+        this.featureRepo = featureRepo;
     }
 }

@@ -2,7 +2,6 @@ package com.task.features.persistence.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,13 +18,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
- * @author nikolay.tashev on 22/01/2018.
+ * Persistence related configuration.
  */
 @Configuration
 @EnableTransactionManagement()
 @EnableJpaRepositories("com.task.features.persistence")
 public class PersistenceConfiguration {
 
+    /**
+     * Creates entity manager factory bean.
+     *
+     * @return entity manager factory bean
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -41,18 +45,28 @@ public class PersistenceConfiguration {
         return em;
     }
 
+    /**
+     * Creates data source for db connection.
+     *
+     * @return data source bean
+     */
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/task");
+        dataSource.setUrl("jdbc:mysql://database:3306/task");
         dataSource.setUsername("task");
         dataSource.setPassword("task");
 
         return dataSource;
     }
 
-
+    /**
+     * Creates transaction manager.
+     *
+     * @param entityManagerFactory entity manager factory
+     * @return transaction manager
+     */
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -61,6 +75,11 @@ public class PersistenceConfiguration {
         return transactionManager;
     }
 
+    /**
+     * Creates persistence exception post processor.
+     *
+     * @return persistence exception post processor
+     */
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
         return new PersistenceExceptionTranslationPostProcessor();

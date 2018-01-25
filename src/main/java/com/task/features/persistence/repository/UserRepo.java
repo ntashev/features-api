@@ -13,11 +13,28 @@ import javax.transaction.Transactional;
  */
 public interface UserRepo extends Repository<UserEntity, Integer> {
 
+    /**
+     * Finds {@link UserEntity} by id.
+     *
+     * @param id user id
+     * @return Optional containing {@link  UserEntity} if found, otherwise empty {@link Optional}
+     */
     Optional<UserEntity> findOneById(Integer id);
 
+    /**
+     * Saves {@link UserEntity} to persistence store.
+     *
+     * @param entity entity to save
+     * @return saved entity
+     */
     @Transactional
-    UserEntity save(UserEntity entity);
+    void save(UserEntity entity);
 
+    /**
+     * Deletes {@link UserEntity} from persistence store.
+     *
+     * @param entity entity to delete
+     */
     @Transactional
     void delete(UserEntity entity);
 }
