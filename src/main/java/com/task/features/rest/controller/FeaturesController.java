@@ -60,7 +60,7 @@ public class FeaturesController {
      *
      * @param feature feature dto
      * @return empty response with 201 status
-     * @throws URISyntaxException
+     * @throws URISyntaxException in case of illigela URI
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -117,7 +117,7 @@ public class FeaturesController {
     }
 
     /**
-     * Enabels/disables a feature for user.
+     * Enables/disables a feature for user.
      *
      * @param userId user id
      * @param request feature to enable/disable

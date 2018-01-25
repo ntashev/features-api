@@ -25,7 +25,6 @@ public interface UserRepo extends Repository<UserEntity, Integer> {
      * Saves {@link UserEntity} to persistence store.
      *
      * @param entity entity to save
-     * @return saved entity
      */
     @Transactional
     void save(UserEntity entity);

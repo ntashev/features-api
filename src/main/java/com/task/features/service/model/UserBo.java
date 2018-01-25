@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Business onject representation of user.
+ * Business object representation of user.
  */
 public class UserBo {
 

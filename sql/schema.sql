@@ -20,8 +20,8 @@ CREATE TABLE users_features (
         REFERENCES features(id)) ENGINE=INNODB;
 
 INSERT INTO users(first_name, last_name) VALUES ('John', 'Smith');
-INSERT INTO users(first_name, last_name) VALUES ('Michael', 'Johnes');
-INSERT INTO users(first_name, last_name) VALUES ('Ben', 'Johnes');
+INSERT INTO users(first_name, last_name) VALUES ('Michael', 'Jones');
+INSERT INTO users(first_name, last_name) VALUES ('Ben', 'Jones');
 INSERT INTO features(name, globally_enabled) VALUES ('xero', 1);
 INSERT INTO features(name, globally_enabled) VALUES ('credit', 1);
 INSERT INTO users_features(feature_id, user_id) VALUES (1, 1);

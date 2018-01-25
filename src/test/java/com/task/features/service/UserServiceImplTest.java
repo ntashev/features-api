@@ -88,7 +88,8 @@ public class UserServiceImplTest {
         FeatureBo bo1 = new FeatureBo();
         bo1.setName("feature");
         bo1.setEnabled(true);
-        Set<FeatureBo> expectedFeatures = new HashSet<>(Arrays.asList(bo1));
+        Set<FeatureBo> expectedFeatures = new HashSet<>();
+        expectedFeatures.add(bo1);
         UserBo expectedUser = new UserBo();
         expectedUser.setFeatures(expectedFeatures);
         expectedUser.setFirstName("John");
