@@ -3,10 +3,16 @@ api:
     ports:
         - "8000:8080"
     volumes:
-        - ./build/libs/features-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/task.war
+        - ./webapps/features-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/task.war
     links:
         - "db:database"
-   
+    environment:
+        DB_HOST: "database"
+        DB_PORT: "3306"
+        DB_NAME: "task"
+        DB_USER_NAME: "task"
+        DB_PASSWORD: "task"
+
 db:
     image: mysql
     ports:

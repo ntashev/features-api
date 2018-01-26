@@ -6,6 +6,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.util.Arrays;
 
@@ -26,5 +27,15 @@ public class ApplicationConfiguration {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("features"), new ConcurrentMapCache("users")));
         return cacheManager;
+    }
+
+    /**
+     * Creates PropertySourcesPlaceholderConfigurer bean.
+     *
+     * @return PropertySourcesPlaceholderConfigurer bean
+     */
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 }

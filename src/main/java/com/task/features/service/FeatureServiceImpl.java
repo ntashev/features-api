@@ -39,7 +39,7 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "features", key = "#root.target.ALL_FEATURES_KEY")
+    @CacheEvict(cacheNames = {"features", "users"}, allEntries =  true)
     public void updateFeature(Integer featureId, FeatureBo feature) {
         FeatureEntity existingFeature = repo.findOneById(featureId).orElseThrow(() -> {
             logger.info("Feature with id {} not found", featureId);
@@ -62,14 +62,9 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "features", key = "#root.target.ALL_FEATURES_KEY")
+    @CacheEvict(cacheNames = {"features", "users"}, allEntries =  true)
     public void deleteFeature(Integer featureId) {
-        FeatureEntity feature = repo.findOneById(featureId).orElseThrow(() -> {
-            logger.info("Feature with id {} not found", featureId);
-            return new EntityNotFoundException("Feature not found.");
-        });
-
-        repo.delete(feature);
+        repo.findOneById(featureId).ifPresent(repo::delete);
         logger.info("Deleted feature with id {}", featureId);
     }
 

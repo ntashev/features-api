@@ -2,6 +2,8 @@ package com.task.features.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Objects;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -31,6 +33,20 @@ public class FeatureForUserRequestDto {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeatureForUserRequestDto that = (FeatureForUserRequestDto) o;
+        return Objects.equals(featureId, that.featureId) &&
+                Objects.equals(enabled, that.enabled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(featureId, enabled);
     }
 
     @Override

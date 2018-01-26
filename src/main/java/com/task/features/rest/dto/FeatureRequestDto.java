@@ -3,6 +3,8 @@ package com.task.features.rest.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 
 public class FeatureRequestDto {
@@ -28,6 +30,20 @@ public class FeatureRequestDto {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeatureRequestDto that = (FeatureRequestDto) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(enabled, that.enabled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, enabled);
     }
 
     @Override

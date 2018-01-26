@@ -2,6 +2,7 @@ package com.task.features.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,6 +18,19 @@ public class AvailableFeaturesDto {
 
     public void setEnabledFeatures(Set<FeatureResponseDto> enabledFeatures) {
         this.enabledFeatures = enabledFeatures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AvailableFeaturesDto that = (AvailableFeaturesDto) o;
+        return Objects.equals(enabledFeatures, that.enabledFeatures);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(enabledFeatures);
     }
 
     @Override

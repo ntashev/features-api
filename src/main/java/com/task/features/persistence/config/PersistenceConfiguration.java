@@ -1,6 +1,7 @@
 package com.task.features.persistence.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -12,6 +13,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -25,24 +27,41 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("com.task.features.persistence")
 public class PersistenceConfiguration {
 
+    @Value("${DB_HOST:}")
+    private String dbHost;
+    @Value("${DB_PORT:}")
+    private String dbPort;
+    @Value("${DB_NAME:}")
+    private String dbName;
+    @Value("${DB_USER_NAME:}")
+    private String dbUserName;
+    @Value("${DB_PASSWORD:}")
+    private String dbPassword;
+
     /**
      * Creates entity manager factory bean.
      *
      * @return entity manager factory bean
      */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws SQLException {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
         em.setPackagesToScan("com.task.features.persistence.entity");
 
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
+        Properties hibernateProperties = getHibernateProperties();
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(hibernateProperties);
 
         return em;
+    }
+
+    @Bean
+    public Properties getHibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
+        return hibernateProperties;
     }
 
     /**
@@ -54,9 +73,9 @@ public class PersistenceConfiguration {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://database:3306/task");
-        dataSource.setUsername("task");
-        dataSource.setPassword("task");
+        dataSource.setUrl("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName);
+        dataSource.setUsername(dbUserName);
+        dataSource.setPassword(dbPassword);
 
         return dataSource;
     }

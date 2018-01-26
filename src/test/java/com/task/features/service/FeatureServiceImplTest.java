@@ -153,16 +153,6 @@ public class FeatureServiceImplTest {
         assertEquals(Integer.valueOf(1), id);
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void testDeleteFeatureNotFound() {
-        FeatureBo bo = new FeatureBo();
-        bo.setName("updated");
-        bo.setEnabled(true);
-        when(repo.findOneById(1)).thenReturn(Optional.empty());
-
-        service.deleteFeature(1);
-    }
-
     @Test
     public void testDeleteFeatureSuccess() {
         FeatureEntity e = new FeatureEntity();
