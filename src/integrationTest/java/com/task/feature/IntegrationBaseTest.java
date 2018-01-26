@@ -13,7 +13,7 @@ public class IntegrationBaseTest {
     public static void setup() {
         String port = System.getProperty("SERVER_PORT");
         if (port == null) {
-            RestAssured.port = Integer.valueOf(8001);
+            RestAssured.port = 8001;
         } else {
             RestAssured.port = Integer.valueOf(port);
         }

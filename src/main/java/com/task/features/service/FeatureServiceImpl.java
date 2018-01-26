@@ -25,7 +25,7 @@ public class FeatureServiceImpl implements FeatureService {
 
     public static final String ALL_FEATURES_KEY = "allFeaturesKey";
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private FeatureRepo repo;

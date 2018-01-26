@@ -1,0 +1,29 @@
+api:
+    image: tomcat
+    ports:
+        - "8001:8080"
+    volumes:
+        - ../webapps/features-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/task.war
+    links:
+        - "db:database"
+    environment:
+        DB_HOST: "database"
+        DB_PORT: "3306"
+        DB_NAME: "task"
+        DB_USER_NAME: "task"
+        DB_PASSWORD: "task"
+        SERVER_PORT: "8001"
+        SERVER_BASE_PATH: "/task/api/v1/"
+        SERVER_HOST: "http://localhost"
+
+db:
+    image: mysql
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_DATABASE: "task"
+        MYSQL_USER: "task"
+        MYSQL_PASSWORD: "task"
+        MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+        - ../sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql

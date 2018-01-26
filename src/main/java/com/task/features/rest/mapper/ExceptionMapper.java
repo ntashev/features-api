@@ -15,7 +15,7 @@ public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Exceptio
 
     private static final String INTERNAL_SERVER_ERROR_MESSAGE = "Something went wrong with this request. Try again later.";
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Response toResponse(Exception exception) {

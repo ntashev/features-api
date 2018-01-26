@@ -35,7 +35,7 @@ import javax.ws.rs.core.Response;
 @Path("/features")
 public class FeaturesController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private FeatureService featureService;
