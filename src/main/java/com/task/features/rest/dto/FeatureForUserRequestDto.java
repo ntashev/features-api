@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * Data transfer object representation of feature for user request body.
+ * Data transfer object representation of features for user request body.
  */
 public class FeatureForUserRequestDto {
 

@@ -7,10 +7,10 @@ import com.task.features.rest.dto.FeatureRequestDto;
  */
 public class FeatureBoFactory {
     /**
-     * Creates feature bo from dto.
+     * Creates features bo from dto.
      *
      * @param dto request dto
-     * @return feature bo
+     * @return features bo
      */
     public static FeatureBo toBo(FeatureRequestDto dto) {
         FeatureBo bo = new FeatureBo();

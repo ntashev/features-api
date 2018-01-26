@@ -16,10 +16,10 @@ public interface UserService {
     UserBo getUserById(Integer userId);
 
     /**
-     * Enables/disables a feature for a user.
+     * Enables/disables a features for a user.
      *
      * @param userId user id
-     * @param featureId feature id
+     * @param featureId features id
      * @param enabled enabled/disabled
      */
     void updateFeatureForUser(Integer userId, Integer featureId, boolean enabled);

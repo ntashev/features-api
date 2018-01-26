@@ -21,7 +21,7 @@ public class UserBoFactoryTest {
     public void testToBo() {
         FeatureEntity e1 = new FeatureEntity();
         FeatureEntity e2 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(true);
         e2.setName("feature2");
         e2.setGloballyEnabled(false);
@@ -32,7 +32,7 @@ public class UserBoFactoryTest {
         user.setFeatures(new HashSet<>(Arrays.asList(e1, e2)));
         FeatureBo bo1 = new FeatureBo();
         FeatureBo bo2 = new FeatureBo();
-        bo1.setName("feature");
+        bo1.setName("features");
         bo1.setEnabled(true);
         bo2.setName("feature2");
         bo2.setEnabled(true);

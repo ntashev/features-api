@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Objects;
 
 /**
- * Business object representation of feature.
+ * Business object representation of features.
  */
 public class FeatureBo {
 

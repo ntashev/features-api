@@ -60,10 +60,10 @@ public class UserServiceImpl implements UserService {
 
         if (enabled) {
             enableFeatureForUser(user, feature);
-            logger.info("Enabled feature with id {} for user with id {}", featureId, userId);
+            logger.info("Enabled features with id {} for user with id {}", featureId, userId);
         } else {
             disableFeatureForUser(user, feature);
-            logger.info("Disabled feature with id {} for user with id {}", featureId, userId);
+            logger.info("Disabled features with id {} for user with id {}", featureId, userId);
         }
     }
 

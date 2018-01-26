@@ -56,47 +56,47 @@ public class FeaturesController {
     }
 
     /**
-     * Creates a feature.
+     * Creates a features.
      *
-     * @param feature feature dto
+     * @param feature features dto
      * @return empty response with 201 status
      * @throws URISyntaxException in case of illigela URI
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createFeature(@Valid FeatureRequestDto feature) throws URISyntaxException {
-        logger.info("Creating feature {}", feature);
+        logger.info("Creating features {}", feature);
         Integer id = featureService.createFeature(FeatureBoFactory.toBo(feature));
         return Response.created(new URI("features/" + id)).build();
     }
 
     /**
-     * Updates a feature.
+     * Updates a features.
      *
-     * @param id feature id
-     * @param feature updated feature
+     * @param id features id
+     * @param feature updated features
      * @return empty response with 204 status
      */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateFeature(@Valid @Min(1) @PathParam("id") int id, @Valid FeatureRequestDto feature) {
-        logger.info("Updating feature with id {} to {}", id, feature);
+        logger.info("Updating features with id {} to {}", id, feature);
         featureService.updateFeature(id, FeatureBoFactory.toBo(feature));
         return Response.noContent().build();
     }
 
     /**
-     * Deletes a feature.
+     * Deletes a features.
      *
-     * @param id feature id
+     * @param id features id
      * @return empty response with 204 status
      */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteGlobalFeature(@Valid @Min(1) @PathParam("id") int id) {
-        logger.info("Deleting feature with id {}", id);
+        logger.info("Deleting features with id {}", id);
         featureService.deleteFeature(id);
         return Response.noContent().build();
     }
@@ -117,17 +117,17 @@ public class FeaturesController {
     }
 
     /**
-     * Enables/disables a feature for user.
+     * Enables/disables a features for user.
      *
      * @param userId user id
-     * @param request feature to enable/disable
+     * @param request features to enable/disable
      * @return empty response with 204 status
      */
     @PUT
     @Path("/user/{userId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response enableFeatureForUser(@Valid @Min(1) @PathParam("userId") int userId, @Valid FeatureForUserRequestDto request) {
-        logger.info("Updating feature with id {} for user with id {} to enabled {}", request.getFeatureId(), userId, request.isEnabled());
+        logger.info("Updating features with id {} for user with id {} to enabled {}", request.getFeatureId(), userId, request.isEnabled());
         userService.updateFeatureForUser(userId, request.getFeatureId(), request.isEnabled());
         return Response.noContent().build();
     }

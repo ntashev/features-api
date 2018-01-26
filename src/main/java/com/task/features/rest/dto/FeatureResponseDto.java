@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Objects;
 
 /**
- * Data transfer object representation of feature response body.
+ * Data transfer object representation of features response body.
  */
 public class FeatureResponseDto {
 

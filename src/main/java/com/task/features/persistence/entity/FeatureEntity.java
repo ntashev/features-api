@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Entity representation of feature.
+ * Entity representation of features.
  */
 @Entity
 @Table(name = "features")

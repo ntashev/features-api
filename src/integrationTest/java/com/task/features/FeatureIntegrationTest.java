@@ -1,4 +1,4 @@
-package com.task.feature;
+package com.task.features;
 
 import com.task.features.rest.dto.AvailableFeaturesDto;
 import com.task.features.rest.dto.FeatureForUserRequestDto;
@@ -53,7 +53,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
         assertTrue(responseBody.getEnabledFeatures().contains(expected));
     }
 
-    //Create feature tests
+    //Create features tests
     @Test
     public void testCreateFeatureSuccess() {
         String randomString = UUID.randomUUID().toString().substring(0, 10);
@@ -112,7 +112,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
                 .then().statusCode(400).body("errorMessage", equalTo("'enabled' may not be null"));
     }
 
-    //Update feature tests
+    //Update features tests
     @Test
     public void testUpdateFeatureNameSuccess() {
         String randomString = UUID.randomUUID().toString().substring(0, 10);
@@ -244,7 +244,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
     }
 
 
-    //Delete feature tests
+    //Delete features tests
     @Test
     public void testDeleteFeatureInvalidId() {
         given().contentType(MediaType.APPLICATION_JSON).pathParam("featureId", 0)
@@ -278,7 +278,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
 
 
 
-    //Enables/disables a feature for user tests
+    //Enables/disables a features for user tests
     @Test
     public void testEnableFeatureForUserInvalidId() {
         FeatureForUserRequestDto dto = new FeatureForUserRequestDto();
@@ -450,7 +450,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
         String randomString = UUID.randomUUID().toString().substring(0, 10);
         FeatureRequestDto dto = new FeatureRequestDto();
         dto.setEnabled(true);
-        dto.setName("feature" + randomString);
+        dto.setName("features" + randomString);
         String featureId = createNewFeature(dto);
 
         FeatureForUserRequestDto enableDto = new FeatureForUserRequestDto();
@@ -465,7 +465,7 @@ public class FeatureIntegrationTest extends IntegrationBaseTest {
         AvailableFeaturesDto responseBody = response.getBody().as(AvailableFeaturesDto.class);
 
         FeatureResponseDto expected = new FeatureResponseDto();
-        expected.setName("feature" + randomString);
+        expected.setName("features" + randomString);
 
         assertTrue(responseBody.getEnabledFeatures().contains(expected));
     }

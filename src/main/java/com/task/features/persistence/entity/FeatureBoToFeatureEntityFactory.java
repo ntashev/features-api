@@ -11,7 +11,7 @@ public class FeatureBoToFeatureEntityFactory {
      * Creates {@link FeatureBo} from entity.
      *
      * @param entity entity
-     * @return feature business object
+     * @return features business object
      */
     public static FeatureBo toBo(FeatureEntity entity) {
         return toBo(entity, entity.isGloballyEnabled());
@@ -22,7 +22,7 @@ public class FeatureBoToFeatureEntityFactory {
      *
      * @param entity entity
      * @param isEnabled is enabled
-     * @return feature business object
+     * @return features business object
      */
     public static FeatureBo toBo(FeatureEntity entity, boolean isEnabled) {
         FeatureBo bo = new FeatureBo();

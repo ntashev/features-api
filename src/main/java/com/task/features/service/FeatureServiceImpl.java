@@ -50,14 +50,14 @@ public class FeatureServiceImpl implements FeatureService {
         existingFeature.setName(feature.getName());
         repo.save(existingFeature);
 
-        logger.info("Updated feature with id {}", featureId);
+        logger.info("Updated features with id {}", featureId);
     }
 
     @Override
     @CacheEvict(cacheNames = "features", key = "#root.target.ALL_FEATURES_KEY")
     public Integer createFeature(FeatureBo feature) {
         FeatureEntity entity = repo.save(FeatureBoToFeatureEntityFactory.toEntity(feature));
-        logger.info("Created feature with id {}", entity.getId());
+        logger.info("Created features with id {}", entity.getId());
         return entity.getId();
     }
 
@@ -65,7 +65,7 @@ public class FeatureServiceImpl implements FeatureService {
     @CacheEvict(cacheNames = {"features", "users"}, allEntries =  true)
     public void deleteFeature(Integer featureId) {
         repo.findOneById(featureId).ifPresent(repo::delete);
-        logger.info("Deleted feature with id {}", featureId);
+        logger.info("Deleted features with id {}", featureId);
     }
 
     //for testing

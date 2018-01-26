@@ -17,25 +17,25 @@ public interface FeatureService {
     Set<FeatureBo> getEnabledFeatures();
 
     /**
-     * Updates a feature.
+     * Updates a features.
      *
-     * @param featureId feature id
-     * @param feature feature to update to
+     * @param featureId features id
+     * @param feature features to update to
      */
     void updateFeature(Integer featureId, FeatureBo feature);
 
     /**
-     * Creates a feature.
+     * Creates a features.
      *
-     * @param feature feature to create
-     * @return id of created feature
+     * @param feature features to create
+     * @return id of created features
      */
     Integer createFeature(FeatureBo feature);
 
     /**
-     * Deletes a feature.
+     * Deletes a features.
      *
-     * @param featureId feature id to delete
+     * @param featureId features id to delete
      */
     void deleteFeature(Integer featureId);
 }

@@ -1,4 +1,4 @@
-package com.task.feature;
+package com.task.features;
 
 import org.junit.BeforeClass;
 

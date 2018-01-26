@@ -44,7 +44,7 @@ public class UserServiceImplTest {
     public void testGetUserByIdWithTwoEnabledFeatures() {
         FeatureEntity e1 = new FeatureEntity();
         FeatureEntity e2 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(true);
         e2.setName("feature2");
         e2.setGloballyEnabled(true);
@@ -56,7 +56,7 @@ public class UserServiceImplTest {
         when(userRepo.findOneById(1)).thenReturn(Optional.of(user));
         FeatureBo bo1 = new FeatureBo();
         FeatureBo bo2 = new FeatureBo();
-        bo1.setName("feature");
+        bo1.setName("features");
         bo1.setEnabled(true);
         bo2.setName("feature2");
         bo2.setEnabled(true);
@@ -75,7 +75,7 @@ public class UserServiceImplTest {
     public void testGetUserByIdWithOneEnabledAndOneDisabledFeatures() {
         FeatureEntity e1 = new FeatureEntity();
         FeatureEntity e2 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(true);
         e2.setName("feature2");
         e2.setGloballyEnabled(false);
@@ -86,7 +86,7 @@ public class UserServiceImplTest {
         user.setFeatures(new HashSet<>(Arrays.asList(e1, e2)));
         when(userRepo.findOneById(1)).thenReturn(Optional.of(user));
         FeatureBo bo1 = new FeatureBo();
-        bo1.setName("feature");
+        bo1.setName("features");
         bo1.setEnabled(true);
         Set<FeatureBo> expectedFeatures = new HashSet<>();
         expectedFeatures.add(bo1);
@@ -104,7 +104,7 @@ public class UserServiceImplTest {
     public void testGetUserByIdWithTwoDisabledFeatures() {
         FeatureEntity e1 = new FeatureEntity();
         FeatureEntity e2 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(false);
         e2.setName("feature2");
         e2.setGloballyEnabled(false);
@@ -115,7 +115,7 @@ public class UserServiceImplTest {
         user.setFeatures(new HashSet<>(Arrays.asList(e1, e2)));
         when(userRepo.findOneById(1)).thenReturn(Optional.of(user));
         FeatureBo bo1 = new FeatureBo();
-        bo1.setName("feature");
+        bo1.setName("features");
         bo1.setEnabled(true);
         Set<FeatureBo> expectedFeatures = Collections.emptySet();
         UserBo expectedUser = new UserBo();
@@ -137,7 +137,7 @@ public class UserServiceImplTest {
         user.setFeatures(Collections.emptySet());
         when(userRepo.findOneById(1)).thenReturn(Optional.of(user));
         FeatureBo bo1 = new FeatureBo();
-        bo1.setName("feature");
+        bo1.setName("features");
         bo1.setEnabled(true);
         Set<FeatureBo> expectedFeatures = Collections.emptySet();
         UserBo expectedUser = new UserBo();
@@ -168,7 +168,7 @@ public class UserServiceImplTest {
     @Test
     public void testUpdateFeatureForUserEnable() {
         FeatureEntity e1 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(true);
         UserEntity user = new UserEntity();
         user.setId(1);
@@ -190,7 +190,7 @@ public class UserServiceImplTest {
     @Test
     public void testUpdateFeatureForUserDisable() {
         FeatureEntity e1 = new FeatureEntity();
-        e1.setName("feature");
+        e1.setName("features");
         e1.setGloballyEnabled(true);
         UserEntity user = new UserEntity();
         user.setId(1);
