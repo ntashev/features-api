@@ -2,7 +2,6 @@ package com.task.features.service.model;
 
 import com.task.features.persistence.entity.FeatureEntity;
 import com.task.features.persistence.entity.UserEntity;
-
 import org.junit.Test;
 
 import java.util.Arrays;

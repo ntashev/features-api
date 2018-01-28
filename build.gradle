@@ -40,7 +40,6 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.45'
     compile 'commons-dbcp:commons-dbcp:1.4'
     compile 'org.apache.commons:commons-lang3:3.7'
-    compile 'com.h2database:h2:1.4.196'
     compile 'log4j:log4j:1.2.17'
 
     integrationTestCompile 'io.rest-assured:rest-assured:3.0.6'

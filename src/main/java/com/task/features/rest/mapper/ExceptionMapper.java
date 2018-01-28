@@ -1,7 +1,6 @@
 package com.task.features.rest.mapper;
 
 import com.task.features.rest.dto.ErrorDto;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

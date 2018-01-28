@@ -17,6 +17,9 @@ import java.util.Arrays;
 @EnableCaching
 public class ApplicationConfiguration {
 
+    public static final String FEATURES = "features";
+    public static final String USERS = "users";
+
     /**
      * Creates a cache manager bean.
      *
@@ -25,7 +28,7 @@ public class ApplicationConfiguration {
     @Bean
     public CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("features"), new ConcurrentMapCache("users")));
+        cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache(FEATURES), new ConcurrentMapCache(USERS)));
         return cacheManager;
     }
 

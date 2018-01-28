@@ -3,10 +3,12 @@ package com.task.features.rest.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-import javax.validation.constraints.NotNull;
-
+/**
+ * Data transfer object representation of feature request.
+ */
 public class FeatureRequestDto {
 
     @Length(min = 2, max = 30)

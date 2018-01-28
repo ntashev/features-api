@@ -7,20 +7,13 @@ import com.task.features.persistence.repository.UserRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.FeatureBo;
 import com.task.features.service.model.UserBo;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author nikolay.tashev on 25/01/2018.

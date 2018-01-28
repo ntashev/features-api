@@ -1,7 +1,6 @@
 package com.task.features.rest.dto;
 
 import com.task.features.service.model.FeatureBo;
-
 import org.junit.Test;
 
 import java.util.Arrays;

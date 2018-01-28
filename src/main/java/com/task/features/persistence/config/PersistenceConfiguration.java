@@ -13,10 +13,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.Properties;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Persistence related configuration.
@@ -26,15 +25,15 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("com.task.features.persistence")
 public class PersistenceConfiguration {
 
-    @Value("${DB_HOST:}")
+    @Value("${DB_HOST:localhost}")
     private String dbHost;
-    @Value("${DB_PORT:}")
+    @Value("${DB_PORT:3306}")
     private String dbPort;
-    @Value("${DB_NAME:}")
+    @Value("${DB_NAME:task}")
     private String dbName;
-    @Value("${DB_USER_NAME:}")
+    @Value("${DB_USER_NAME:task}")
     private String dbUserName;
-    @Value("${DB_PASSWORD:}")
+    @Value("${DB_PASSWORD:task}")
     private String dbPassword;
 
     /**
@@ -56,6 +55,11 @@ public class PersistenceConfiguration {
         return em;
     }
 
+    /**
+     * Creates hibernate properties.
+     *
+     * @return hibernate properties
+     */
     @Bean
     public Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();

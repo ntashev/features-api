@@ -1,13 +1,12 @@
 package com.task.features.service;
 
 import com.task.features.persistence.entity.FeatureEntity;
-import com.task.features.service.model.UserBoFactory;
 import com.task.features.persistence.entity.UserEntity;
 import com.task.features.persistence.repository.FeatureRepo;
 import com.task.features.persistence.repository.UserRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.UserBo;
-
+import com.task.features.service.model.UserBoFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
+import static com.task.features.config.ApplicationConfiguration.USERS;
+
 /**
- * @author nikolay.tashev on 23/01/2018.
+ * Implementation of {@link UserService}.
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private FeatureRepo featureRepo;
 
     @Override
-    @Cacheable(cacheNames = "users", key = "#userId")
+    @Cacheable(cacheNames = USERS, key = "#userId")
     public UserBo getUserById(Integer userId) {
         UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> {
             logger.info("User with id {} not found", userId);
@@ -40,13 +41,13 @@ public class UserServiceImpl implements UserService {
         });
 
         logger.info("Found user with id {}", user.getId());
-        //filter out services that are globally disabled
+        //filter out features that are globally disabled
         user.setFeatures(user.getFeatures().stream().filter(FeatureEntity::isGloballyEnabled).collect(Collectors.toSet()));
         return UserBoFactory.toBo(user);
     }
 
     @Override
-    @CacheEvict(cacheNames = "users", key = "#userId")
+    @CacheEvict(cacheNames = USERS, key = "#userId")
     public void updateFeatureForUser(Integer userId, Integer featureId, boolean enabled) {
         UserEntity user =  userRepo.findOneById(userId).orElseThrow(() -> {
             logger.info("User with id {} not found", userId);

@@ -5,7 +5,6 @@ import com.task.features.persistence.entity.FeatureEntity;
 import com.task.features.persistence.repository.FeatureRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.FeatureBo;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.task.features.config.ApplicationConfiguration.FEATURES;
+import static com.task.features.config.ApplicationConfiguration.USERS;
+
 /**
- * @author nikolay.tashev on 23/01/2018.
+ * Implementation fo {@link FeatureService}.
  */
 @Service
 public class FeatureServiceImpl implements FeatureService {
@@ -31,7 +33,7 @@ public class FeatureServiceImpl implements FeatureService {
     private FeatureRepo repo;
 
     @Override
-    @Cacheable(cacheNames = "features", key = "#root.target.ALL_FEATURES_KEY")
+    @Cacheable(cacheNames = FEATURES, key = "#root.target.ALL_FEATURES_KEY")
     public Set<FeatureBo> getEnabledFeatures() {
         try (Stream<FeatureEntity> features = repo.findAll()) {
             return features.filter(FeatureEntity::isGloballyEnabled).map(FeatureBoToFeatureEntityFactory::toBo).collect(Collectors.toSet());
@@ -39,7 +41,7 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    @CacheEvict(cacheNames = {"features", "users"}, allEntries =  true)
+    @CacheEvict(cacheNames = {FEATURES, USERS}, allEntries =  true)
     public void updateFeature(Integer featureId, FeatureBo feature) {
         FeatureEntity existingFeature = repo.findOneById(featureId).orElseThrow(() -> {
             logger.info("Feature with id {} not found", featureId);
@@ -54,7 +56,7 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "features", key = "#root.target.ALL_FEATURES_KEY")
+    @CacheEvict(cacheNames = FEATURES, key = "#root.target.ALL_FEATURES_KEY")
     public Integer createFeature(FeatureBo feature) {
         FeatureEntity entity = repo.save(FeatureBoToFeatureEntityFactory.toEntity(feature));
         logger.info("Created features with id {}", entity.getId());
@@ -62,7 +64,7 @@ public class FeatureServiceImpl implements FeatureService {
     }
 
     @Override
-    @CacheEvict(cacheNames = {"features", "users"}, allEntries =  true)
+    @CacheEvict(cacheNames = {FEATURES, USERS}, allEntries =  true)
     public void deleteFeature(Integer featureId) {
         repo.findOneById(featureId).ifPresent(repo::delete);
         logger.info("Deleted features with id {}", featureId);

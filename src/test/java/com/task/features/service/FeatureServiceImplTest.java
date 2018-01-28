@@ -4,7 +4,6 @@ import com.task.features.persistence.entity.FeatureEntity;
 import com.task.features.persistence.repository.FeatureRepo;
 import com.task.features.service.exception.EntityNotFoundException;
 import com.task.features.service.model.FeatureBo;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,13 +12,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author nikolay.tashev on 25/01/2018.

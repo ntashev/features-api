@@ -4,14 +4,11 @@ import com.task.features.rest.dto.AvailableFeaturesDto;
 import com.task.features.rest.dto.FeatureForUserRequestDto;
 import com.task.features.rest.dto.FeatureRequestDto;
 import com.task.features.rest.dto.FeatureResponseDto;
-
+import io.restassured.response.Response;
 import org.junit.Test;
 
-import java.util.UUID;
-
 import javax.ws.rs.core.MediaType;
-
-import io.restassured.response.Response;
+import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static junit.framework.TestCase.assertFalse;
@@ -22,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author nikolay.tashev on 26/01/2018.
+ * Features API integration tests.
  */
 public class FeatureIntegrationTest extends IntegrationBaseTest {
 

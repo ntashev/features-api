@@ -8,26 +8,17 @@ import com.task.features.service.FeatureService;
 import com.task.features.service.UserService;
 import com.task.features.service.model.FeatureBoFactory;
 import com.task.features.service.model.UserBo;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Features functionality endpoints.
@@ -56,11 +47,11 @@ public class FeaturesController {
     }
 
     /**
-     * Creates a features.
+     * Creates a feature.
      *
-     * @param feature features dto
+     * @param feature feature dto
      * @return empty response with 201 status
-     * @throws URISyntaxException in case of illigela URI
+     * @throws URISyntaxException in case of illegal URI
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -71,10 +62,10 @@ public class FeaturesController {
     }
 
     /**
-     * Updates a features.
+     * Updates a feature.
      *
      * @param id features id
-     * @param feature updated features
+     * @param feature updated feature
      * @return empty response with 204 status
      */
     @PUT
@@ -94,7 +85,6 @@ public class FeaturesController {
      */
     @DELETE
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteGlobalFeature(@Valid @Min(1) @PathParam("id") int id) {
         logger.info("Deleting features with id {}", id);
         featureService.deleteFeature(id);

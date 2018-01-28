@@ -1,12 +1,9 @@
 package com.task.features.service.model;
 
 import com.task.features.rest.dto.FeatureRequestDto;
-
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author nikolay.tashev on 25/01/2018.

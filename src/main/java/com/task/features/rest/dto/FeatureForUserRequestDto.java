@@ -2,10 +2,9 @@ package com.task.features.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.Objects;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Data transfer object representation of features for user request body.

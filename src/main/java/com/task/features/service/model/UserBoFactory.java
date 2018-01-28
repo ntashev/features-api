@@ -2,7 +2,6 @@ package com.task.features.service.model;
 
 import com.task.features.persistence.entity.FeatureBoToFeatureEntityFactory;
 import com.task.features.persistence.entity.UserEntity;
-import com.task.features.service.model.UserBo;
 
 import java.util.stream.Collectors;
 

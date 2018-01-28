@@ -1,13 +1,11 @@
 package com.task.features.persistence.repository;
 
 import com.task.features.persistence.entity.FeatureEntity;
-
 import org.springframework.data.repository.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import javax.transaction.Transactional;
 
 /**
  * Repository for {@link FeatureEntity} persistence operations.
