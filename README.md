@@ -19,3 +19,12 @@ After start up the api will be accessible at http://localhost:8000/task/api/v1/f
 2. Execute sql script at sql/schema.sql
 3. Deploy the artifact located in webapps folder in your running servlet container.
 
+### Configuration
+
+The following proprerties can be configured using environment variables:
+
+        DB_HOST
+        DB_PORT
+        DB_NAME
+        DB_USER_NAME
+        DB_PASSWORD
